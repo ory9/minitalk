@@ -24,14 +24,14 @@ int	send_null(int pid, char *str)
 
 int	send_bit(int pid, char *str)
 {
-	static char	*message = 0;
+	static char	*message;
 	static int	s_pid = 0;
 	static int	bits = -1;
 
 	if (str)
 		message = ft_strdup(str);
 	if (!message)
-		error(0);
+		error(message);
 	if (pid)
 		s_pid = pid;
 	if (message[++bits / 8])
@@ -57,7 +57,7 @@ void	signal_handler(int signum)
 
 	end = 0;
 	if (signum == SIGUSR1)
-		end = send_bit(0, 0);
+		end = send_bit(0, NULL);
 	else if (signum == SIGUSR2)
 		exit(EXIT_FAILURE);
 	if (end)
