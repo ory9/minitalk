@@ -34,7 +34,8 @@ int	send_bit(int pid, char *str)
 		error(message);
 	if (pid)
 		s_pid = pid;
-	if (message[++bits / 8])
+	++bits;
+	if (message[bits / 8])
 	{
 		if (message[bits / 8] & (0x80 >> (bits % 8)))
 		{
